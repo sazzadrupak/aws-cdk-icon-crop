@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import { Tags } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 import { createApiGateway } from './api-gateway';
@@ -30,5 +31,8 @@ export class IconCropStack extends cdk.Stack {
 
     const api = createApiGateway(this, iconCrop);
     const monitoring = setupMonitoring(this, iconCrop);
+    Tags.of(lambdaRole).add('service', 'lambda'); // Tags on individual service
+
+    // Tags.of(lambdaRole).remove('service') // to remove tags from resource
   }
 }
