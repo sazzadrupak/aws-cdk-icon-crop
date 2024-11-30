@@ -4,6 +4,7 @@ import { Construct } from 'constructs';
 import { createApiGateway } from './api-gateway';
 import { createLambdaRole } from './iam';
 import { createIconCropFunction } from './lambda';
+import { setupMonitoring } from './monitor';
 import { createIconBuckets } from './s3';
 
 export class IconCropStack extends cdk.Stack {
@@ -28,5 +29,6 @@ export class IconCropStack extends cdk.Stack {
     );
 
     const api = createApiGateway(this, iconCrop);
+    const monitoring = setupMonitoring(this, iconCrop);
   }
 }
